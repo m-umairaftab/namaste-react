@@ -24,14 +24,6 @@ export default class UserClass extends Component {
 
     return (
       <div className="user-card">
-        {/* <h1>Count: {count}</h1>
-        <button
-          onClick={() => {
-            this.setState({ count: this.state.count + 1 });
-          }}
-        >
-          Count Increase
-        </button> */}
         <img src={avatar_url} alt="" />
         <h1>Name: {name}</h1>
         <h2>Location: {location}</h2>
@@ -40,3 +32,25 @@ export default class UserClass extends Component {
     );
   }
 }
+
+/****
+ *
+ * --- MOUNTING ----
+ *
+ * Constructor (dummy)
+ * Render (dummy)
+ *      <HTML Dummy >
+ * Component Did MOunt
+ *      <API Call>
+ *      <this.setState> -> State variable is updated
+ *
+ * ---- UPDATE
+ *
+ *      render(APi data)
+ *      <HTML (new API data>)
+ *      ccomponentDid Update
+ *
+ *
+ *
+ *
+ */

@@ -19,13 +19,15 @@
   },
   "homepage": "https://github.com/m-umairaftab/namaste-react#readme",
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.14",
     "parcel": "^2.8.3",
     "process": "^0.11.10"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.11.2"
+    "react-router-dom": "^6.11.2",
+    "tailwindcss": "^4.0.14"
   },
   "browserList": [
     "last 2 versions"
