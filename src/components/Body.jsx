@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { resList } from "../utils/mockData";
-import { RestaurantCard } from "./RestaurantCard";
-import { FETCH_MENU_URL } from "../utils/constants";
+import { RestaurantCard, withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 export const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
@@ -12,6 +12,9 @@ export const Body = () => {
   const [searchText, setSearchText] = useState("");
   const onlineStatus = useOnlineStatus();
 
+  const { loggedInUser, setUserName } = useContext(UserContext);
+
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
   useEffect(() => {
     fetchData();
   }, []);
@@ -50,7 +53,7 @@ export const Body = () => {
         <div className="m-4 p-4">
           <input
             type="text"
-            className="border border-solid border-black"
+            className="border border-solid border-black rounded-sm pl-2"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
@@ -81,6 +84,15 @@ export const Body = () => {
             Top Rated Restaurants
           </button>
         </div>
+        <div className=" m-4 p-4 flex items-center">
+          <label className="font-bold">UserName </label>
+          <input
+            type="text"
+            className="border border-solid border-black px-2 ml-3 rounded-sm"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
       </div>
       <div className="flex flex-wrap">
         {filteredRestaurant?.map((restaurant) => (
@@ -88,7 +100,11 @@ export const Body = () => {
             key={restaurant?.info?.id}
             to={"/restaurants/" + restaurant?.info?.id}
           >
-            <RestaurantCard resData={restaurant.info} />
+            {restaurant?.info?.avgRating >= 4.5 ? (
+              <RestaurantCardPromoted resData={restaurant.info} />
+            ) : (
+              <RestaurantCard resData={restaurant.info} />
+            )}
           </Link>
         ))}
       </div>
